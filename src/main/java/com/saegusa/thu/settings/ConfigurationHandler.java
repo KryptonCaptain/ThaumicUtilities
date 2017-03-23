@@ -1,9 +1,9 @@
 package com.saegusa.thu.settings;
 
-import net.minecraftforge.common.config.*;
-import java.io.*;
-import cpw.mods.fml.client.event.*;
-import cpw.mods.fml.common.eventhandler.*;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import java.io.File;
+import net.minecraftforge.common.config.Configuration;
 
 public class ConfigurationHandler
 {

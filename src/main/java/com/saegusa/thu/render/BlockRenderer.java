@@ -1,10 +1,12 @@
 package com.saegusa.thu.render;
 
-import net.minecraft.block.*;
-import net.minecraft.util.*;
-import org.lwjgl.opengl.*;
-import net.minecraft.world.*;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.world.IBlockAccess;
+import org.lwjgl.opengl.GL11;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
 
 public class BlockRenderer
 {

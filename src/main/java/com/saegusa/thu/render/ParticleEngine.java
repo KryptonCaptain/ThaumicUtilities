@@ -1,21 +1,26 @@
 package com.saegusa.thu.render;
 
-import net.minecraft.world.*;
-import java.util.*;
-import net.minecraft.client.particle.*;
-import net.minecraftforge.client.event.*;
-import net.minecraft.client.*;
-import org.lwjgl.opengl.*;
-import net.minecraft.client.renderer.*;
-import java.util.concurrent.*;
-import net.minecraft.util.*;
-import net.minecraft.entity.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.crash.*;
-import cpw.mods.fml.relauncher.*;
-import cpw.mods.fml.common.eventhandler.*;
-import cpw.mods.fml.common.gameevent.*;
-import cpw.mods.fml.client.*;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.gameevent.TickEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ReportedException;
+import java.util.concurrent.Callable;
+import net.minecraft.crash.CrashReport;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.ActiveRenderInfo;
+import org.lwjgl.opengl.GL11;
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.event.RenderWorldLastEvent;
+import net.minecraft.client.particle.EntityFX;
+import java.util.ArrayList;
+import java.util.HashMap;
+import net.minecraft.world.World;
+import net.minecraft.util.ResourceLocation;
 
 public class ParticleEngine
 {

@@ -1,9 +1,10 @@
 package com.saegusa.thu.utils;
 
-import net.minecraft.block.*;
-import net.minecraft.item.*;
-import cpw.mods.fml.common.*;
-import net.minecraft.creativetab.*;
+import net.minecraft.creativetab.CreativeTabs;
+import cpw.mods.fml.common.FMLLog;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
+import net.minecraft.block.Block;
 
 public class ThaumcraftUtils
 {

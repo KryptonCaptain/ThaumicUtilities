@@ -1,36 +1,34 @@
 package com.saegusa.thu.utils;
 
-import java.text.*;
-
-import net.minecraft.entity.player.*;
-import net.minecraft.client.*;
-import net.minecraft.client.renderer.*;
-
-import org.lwjgl.opengl.*;
-
-import net.minecraft.client.renderer.texture.*;
-
-import javax.imageio.*;
-
-import java.awt.image.*;
-import java.io.*;
-
-import net.minecraft.entity.*;
-import net.minecraft.world.*;
-
-import com.saegusa.thu.*;
-import com.saegusa.thu.client.fx.*;
-import com.saegusa.thu.render.*;
-
-import thaumcraft.api.aspects.*;
-import net.minecraft.util.*;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import javax.imageio.ImageIO;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.renderer.ActiveRenderInfo;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Timer;
-import cpw.mods.fml.relauncher.*;
-import net.minecraft.client.gui.inventory.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.client.particle.*;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import org.lwjgl.opengl.GL11;
+import thaumcraft.api.aspects.Aspect;
+import com.saegusa.thu.ThaumicUtilities;
+import com.saegusa.thu.client.fx.FXSparkle;
+import com.saegusa.thu.render.ParticleEngine;
 
-import java.util.*;
+import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class RenderUtils
 {
@@ -374,7 +372,7 @@ public class RenderUtils
     
     public static int getTextureAnimationSize(final String s) {
         if (RenderUtils.textureSizeCache.get(s) != null) {
-            return RenderUtils.textureSizeCache.get(s);
+            return (Integer) /*add*/ RenderUtils.textureSizeCache.get(s);
         }
         try {
             final InputStream inputstream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("thaumcraft", s)).getInputStream();
@@ -394,7 +392,7 @@ public class RenderUtils
     
     public static int getTextureSize(final String s, final int dv) {
         if (RenderUtils.textureSizeCache.get(Arrays.asList(s, dv)) != null) {
-            return RenderUtils.textureSizeCache.get(Arrays.asList(s, dv));
+            return (Integer) /*add*/ RenderUtils.textureSizeCache.get(Arrays.asList(s, dv));
         }
         try {
             final InputStream inputstream = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("thaumcraft", s)).getInputStream();
@@ -514,7 +512,7 @@ public class RenderUtils
     
     public static int getGuiXSize(final GuiContainer gui) {
         try {
-            return (int)ReflectionHelper.getPrivateValue((Class)GuiContainer.class, (Object)gui, new String[] { "xSize", "f", "field_146999_f" });
+            return ReflectionHelper.getPrivateValue((Class)GuiContainer.class, (Object)gui, new String[] { "xSize", "f", "field_146999_f" });
         }
         catch (Exception ex) {
             return 0;
@@ -523,7 +521,7 @@ public class RenderUtils
     
     public static int getGuiYSize(final GuiContainer gui) {
         try {
-            return (int)ReflectionHelper.getPrivateValue((Class)GuiContainer.class, (Object)gui, new String[] { "ySize", "g", "field_147000_g" });
+            return ReflectionHelper.getPrivateValue((Class)GuiContainer.class, (Object)gui, new String[] { "ySize", "g", "field_147000_g" });
         }
         catch (Exception ex) {
             return 0;
@@ -532,7 +530,7 @@ public class RenderUtils
     
     public static float getGuiZLevel(final Gui gui) {
         try {
-            return (float)ReflectionHelper.getPrivateValue((Class)Gui.class, (Object)gui, new String[] { "zLevel", "e", "field_73735_i" });
+            return ReflectionHelper.getPrivateValue((Class)Gui.class, (Object)gui, new String[] { "zLevel", "e", "field_73735_i" });
         }
         catch (Exception ex) {
             return 0.0f;
@@ -550,7 +548,7 @@ public class RenderUtils
     
     static {
         colorNames = new String[] { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Gray", "Light Gray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
-        colorCodes = new String[] { "\u00ef¿½f", "\u00ef¿½6", "\u00ef¿½d", "\u00ef¿½9", "\u00ef¿½e", "\u00ef¿½a", "\u00ef¿½d", "\u00ef¿½8", "\u00ef¿½7", "\u00ef¿½b", "\u00ef¿½5", "\u00ef¿½9", "\u00ef¿½4", "\u00ef¿½2", "\u00ef¿½c", "\u00ef¿½8" };
+        colorCodes = new String[] { "§f", 	 "§6", 		"§d", 		"§9", 			"§e", 	"§a", "§d", 	"§8", 		"§7", 	"§b", 		"§5", "§9", 	"§4", 	"§2", 	"§c", 	"§8" };
         colors = new int[] { 15790320, 15435844, 12801229, 6719955, 14602026, 4312372, 14188952, 4408131, 10526880, 2651799, 8073150, 2437522, 5320730, 3887386, 11743532, 1973019 };
         RenderUtils.connectedTextureRefByID = new int[] { 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 4, 4, 5, 5, 4, 4, 5, 5, 17, 17, 22, 26, 17, 17, 22, 26, 16, 16, 20, 20, 16, 16, 28, 28, 21, 21, 46, 42, 21, 21, 43, 38, 4, 4, 5, 5, 4, 4, 5, 5, 9, 9, 30, 12, 9, 9, 30, 12, 16, 16, 20, 20, 16, 16, 28, 28, 25, 25, 45, 37, 25, 25, 40, 32, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 0, 0, 6, 6, 0, 0, 6, 6, 3, 3, 19, 15, 3, 3, 19, 15, 1, 1, 18, 18, 1, 1, 13, 13, 2, 2, 23, 31, 2, 2, 27, 14, 4, 4, 5, 5, 4, 4, 5, 5, 17, 17, 22, 26, 17, 17, 22, 26, 7, 7, 24, 24, 7, 7, 10, 10, 29, 29, 44, 41, 29, 29, 39, 33, 4, 4, 5, 5, 4, 4, 5, 5, 9, 9, 30, 12, 9, 9, 30, 12, 7, 7, 24, 24, 7, 7, 10, 10, 8, 8, 36, 35, 8, 8, 34, 11 };
         RenderUtils.lightBrightnessTable = null;

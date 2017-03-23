@@ -1,12 +1,12 @@
 package com.saegusa.thu.client.fx;
 
-import net.minecraft.client.particle.*;
-import net.minecraft.world.*;
-import net.minecraft.client.renderer.*;
-import org.lwjgl.opengl.*;
-import net.minecraft.entity.*;
-import cpw.mods.fml.client.*;
-import net.minecraft.util.*;
+import net.minecraft.util.MathHelper;
+import cpw.mods.fml.client.FMLClientHandler;
+import net.minecraft.entity.Entity;
+import org.lwjgl.opengl.GL11;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.world.World;
+import net.minecraft.client.particle.EntityFX;
 
 public class FXSparkle extends EntityFX
 {

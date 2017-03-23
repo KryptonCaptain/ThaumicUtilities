@@ -1,9 +1,11 @@
 package com.saegusa.thu.core;
 
-import cpw.mods.fml.client.*;
-import net.minecraftforge.common.*;
-import com.saegusa.thu.tweaks.*;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import com.saegusa.thu.tweaks.VisAmuletTooltipTweaker;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class ClientProxy extends CommonProxy
 {

@@ -1,11 +1,12 @@
 package com.saegusa.thu.render;
 
-import net.minecraftforge.client.event.*;
-import com.saegusa.thu.settings.*;
-import com.saegusa.thu.gui.*;
-import net.minecraft.client.*;
-import cpw.mods.fml.common.eventhandler.*;
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.client.Minecraft;
+import com.saegusa.thu.gui.GuiVisStorage;
+import com.saegusa.thu.settings.ConfigurationHandler;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class RenderGuiHandler
 {

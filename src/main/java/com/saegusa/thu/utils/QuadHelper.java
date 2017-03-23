@@ -1,6 +1,7 @@
 package com.saegusa.thu.utils;
 
-import net.minecraft.util.*;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 
 public class QuadHelper
 {

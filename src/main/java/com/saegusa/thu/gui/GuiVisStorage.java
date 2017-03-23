@@ -1,23 +1,27 @@
 package com.saegusa.thu.gui;
 
-import net.minecraft.client.renderer.entity.*;
-import net.minecraft.client.*;
-import net.minecraft.client.gui.*;
-import net.minecraft.entity.player.*;
-import baubles.api.*;
-import net.minecraft.inventory.*;
-import com.saegusa.thu.settings.*;
-import net.minecraft.item.*;
-import cpw.mods.fml.common.*;
-import thaumcraft.api.*;
-import net.minecraft.util.*;
-import org.lwjgl.opengl.*;
-import com.saegusa.thu.utils.*;
-import java.awt.*;
-import thaumcraft.api.aspects.*;
-import cpw.mods.fml.relauncher.*;
-import net.minecraft.client.renderer.*;
-import java.util.*;
+import java.util.Iterator;
+import net.minecraft.client.renderer.RenderHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.AspectList;
+import java.awt.Color;
+import com.saegusa.thu.utils.RenderUtils;
+import org.lwjgl.opengl.GL11;
+import net.minecraft.util.EnumChatFormatting;
+import thaumcraft.api.ItemApi;
+import cpw.mods.fml.common.Loader;
+import net.minecraft.item.ItemStack;
+import com.saegusa.thu.settings.ConfigurationHandler;
+import net.minecraft.inventory.IInventory;
+import baubles.api.BaublesApi;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.gui.Gui;
 
 public class GuiVisStorage extends Gui
 {

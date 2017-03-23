@@ -1,15 +1,16 @@
 package com.saegusa.thu.tweaks;
 
-import cpw.mods.fml.relauncher.*;
-import java.text.*;
-import net.minecraftforge.event.entity.player.*;
-import net.minecraft.client.gui.*;
-import thaumcraft.api.*;
-import java.util.*;
-import cpw.mods.fml.common.eventhandler.*;
-import com.saegusa.thu.settings.*;
-import net.minecraft.item.*;
-import thaumcraft.api.aspects.*;
+import thaumcraft.api.aspects.Aspect;
+import net.minecraft.item.ItemStack;
+import com.saegusa.thu.settings.ConfigurationHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import java.util.Iterator;
+import thaumcraft.api.ItemApi;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import java.text.DecimalFormat;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class VisAmuletTooltipTweaker
@@ -55,7 +56,7 @@ public class VisAmuletTooltipTweaker
             }
             return tt;
         }
-        return "§e0 §r| §20 §r| §c0 §r| §30 §r| §70 §r| §80"; //fixed bad characters
+        return "§e0 §r| §20 §r| §c0 §r| §30 §r| §70 §r| §80";
     }
     
     static {

@@ -1,15 +1,16 @@
 package com.saegusa.thu.render;
 
-import cpw.mods.fml.client.registry.*;
-import net.minecraft.block.*;
-import com.saegusa.thu.blocks.*;
-import net.minecraft.init.*;
-import java.awt.*;
-import org.lwjgl.opengl.*;
-import net.minecraft.world.*;
-import net.minecraft.client.renderer.*;
-import net.minecraft.client.*;
-import com.saegusa.thu.*;
+import com.saegusa.thu.ThaumicUtilities;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.world.IBlockAccess;
+import org.lwjgl.opengl.GL11;
+import java.awt.Color;
+import net.minecraft.init.Blocks;
+import com.saegusa.thu.blocks.BlockNetherOre;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.block.Block;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class BlockOreRenderer extends BlockRenderer implements ISimpleBlockRenderingHandler
 {

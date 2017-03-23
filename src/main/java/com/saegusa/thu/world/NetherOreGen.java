@@ -1,15 +1,15 @@
 package com.saegusa.thu.world;
 
-import cpw.mods.fml.common.*;
-import java.util.*;
-import net.minecraft.world.*;
-import net.minecraft.world.chunk.*;
-import com.saegusa.thu.settings.*;
-import com.saegusa.thu.*;
-import net.minecraft.init.*;
-import net.minecraft.world.gen.feature.*;
-import com.saegusa.thu.utils.*;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import com.saegusa.thu.utils.ThaumcraftUtils;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraft.init.Blocks;
+import com.saegusa.thu.ThaumicUtilities;
+import com.saegusa.thu.settings.ConfigurationHandler;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.World;
+import java.util.Random;
+import cpw.mods.fml.common.IWorldGenerator;
 
 public class NetherOreGen implements IWorldGenerator
 {

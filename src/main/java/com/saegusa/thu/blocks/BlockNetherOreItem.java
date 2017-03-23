@@ -1,7 +1,8 @@
 package com.saegusa.thu.blocks;
 
-import net.minecraft.block.*;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
 
 public class BlockNetherOreItem extends ItemBlock
 {
