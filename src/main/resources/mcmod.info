@@ -1,0 +1,17 @@
+[
+{
+  "modid": "thutilities",
+  "name": "Thaumic Utilities",
+  "description": "Add more utility to your thaumaturgy.",
+  "version": "0.04a",
+  "mcversion": "1.7.10",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Saegusa"],
+  "credits": "The Forge and FML guys, for making this possible",
+  "logoFile": "",
+  "requiredMods": [ "thaumcraft" ],
+  "screenshots": [],
+  "dependencies": []
+}
+]
