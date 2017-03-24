@@ -37,7 +37,7 @@ public class ConfigHandler
     public static void loadConfig() {
         displayVis = config.getBoolean("displayVisHUD", "general.render", true, "Display Vis Storage HUD on screen when wearing a vis storage amulet.");
         displayVisOnShiftDown = config.getBoolean("displayVisHUD_ShiftKey", "general.render", false, "Only display Vis Storage HUD when Shift key is pressed.");
-        //useOldTextHUD = config.getBoolean("useOldHUD", "general.render", false, "Display old vis storage HUD (text only)");
+        useOldTextHUD = config.getBoolean("useOldHUD", "general.render", false, "Display old vis storage HUD (text only)");
         
         tweakVisAmuletTooltip = config.getBoolean("visAmuletTooltipTweak", "general.tweaks", true, "Tweak the amulet tooltip to be like the wand");
         

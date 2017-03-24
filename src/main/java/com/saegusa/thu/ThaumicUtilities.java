@@ -1,24 +1,18 @@
 package com.saegusa.thu;
 
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.IWorldGenerator;
-import com.saegusa.thu.world.NetherOreGen;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import com.saegusa.thu.render.BlockOreRenderer;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import com.saegusa.thu.blocks.BlockNetherOreItem;
-import com.saegusa.thu.blocks.BlockNetherOre;
-import com.saegusa.thu.render.RenderGuiHandler;
-import net.minecraftforge.common.MinecraftForge;
-import com.saegusa.thu.settings.ConfigHandler;
 import java.io.File;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.block.Block;
-import cpw.mods.fml.common.SidedProxy;
+
+import net.minecraftforge.common.MinecraftForge;
+
 import com.saegusa.thu.core.IProxy;
+import com.saegusa.thu.render.RenderGuiHandler;
+import com.saegusa.thu.settings.ConfigHandler;
+
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = "thutilities", name = "Thaumic Utilities", version = "@version")
 public class ThaumicUtilities

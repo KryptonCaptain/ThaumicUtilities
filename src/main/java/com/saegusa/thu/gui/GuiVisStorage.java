@@ -1,33 +1,39 @@
 package com.saegusa.thu.gui;
 
-import java.util.Iterator;
+import java.awt.Color;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
+
+import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import java.awt.Color;
-import com.saegusa.thu.utils.RenderUtils;
-import org.lwjgl.opengl.GL11;
-import net.minecraft.util.EnumChatFormatting;
-import thaumcraft.api.ItemApi;
-import cpw.mods.fml.common.Loader;
-import net.minecraft.item.ItemStack;
-import com.saegusa.thu.settings.ConfigHandler;
-import net.minecraft.inventory.IInventory;
+import thaumcraft.common.Thaumcraft;
 import baubles.api.BaublesApi;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.client.gui.Gui;
+
+import com.saegusa.thu.settings.ConfigHandler;
+import com.saegusa.thu.settings.ConfigHandler.ThaumcraftSettings;
+import com.saegusa.thu.utils.RenderUtils;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class GuiVisStorage extends Gui
 {
     int mHeight;
     int mWidth;
-    private static final String AMULET = "itemAmuletVis";
+    //private static final String AMULET = "itemAmuletVis";
     final ResourceLocation HUD;
     RenderItem ri;
     
@@ -40,12 +46,12 @@ public class GuiVisStorage extends Gui
         this.mHeight = scaled.getScaledHeight();
         this.mWidth = scaled.getScaledWidth();
         final long time = System.currentTimeMillis();
-        final int aer = 0;
-        final int terra = 0;
-        final int aqua = 0;
-        final int ignis = 0;
-        final int ordo = 0;
-        final int perditio = 0;
+        int aer = 0;
+        int terra = 0;
+        int aqua = 0;
+        int ignis = 0;
+        int ordo = 0;
+        int perditio = 0;
         if (!this.isAmuletInBaubles((EntityPlayer)mc.thePlayer) && !this.isAmuletInInventory((EntityPlayer)mc.thePlayer)) {
             return;
         }
@@ -64,9 +70,27 @@ public class GuiVisStorage extends Gui
                 return;
             }
             if (mc.inGameHasFocus && Minecraft.isGuiEnabled()) {
-                this.renderVisStorage(mc, amulet);
+            	if (ConfigHandler.useOldTextHUD) {
+                    aer = this.getVis(amulet, Aspect.AIR) / 100;
+                    terra = this.getVis(amulet, Aspect.EARTH) / 100;
+                    aqua = this.getVis(amulet, Aspect.WATER) / 100;
+                    ignis = this.getVis(amulet, Aspect.FIRE) / 100;
+                    ordo = this.getVis(amulet, Aspect.ORDER) / 100;
+                    perditio = this.getVis(amulet, Aspect.ENTROPY) / 100;
+                    this.render(mc, aer, terra, aqua, ignis, ordo, perditio);
+            	}
+            	else {
+            		this.renderVisStorage(mc, amulet);
+            	}
+                
             }
         }
+        
+        EntityPlayer player = (EntityPlayer)Minecraft.getMinecraft().renderViewEntity;
+        if ((!player.capabilities.isCreativeMode) && (Thaumcraft.instance.runicEventHandler.runicCharge.containsKey(Integer.valueOf(player.getEntityId()))) && (((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue() > 0) && (Thaumcraft.instance.runicEventHandler.runicInfo.containsKey(Integer.valueOf(player.getEntityId())))) {
+            renderRunicArmorBar(player);
+          }
+        
     }
     
     private boolean checkBaubles() {
@@ -76,8 +100,11 @@ public class GuiVisStorage extends Gui
     private boolean isAmuletInBaubles(final EntityPlayer player) {
         if (this.checkBaubles()) {
             final IInventory babs = BaublesApi.getBaubles(player);
-            for (int i = 0; i < babs.getSizeInventory(); ++i) {
-                if (babs.getStackInSlot(i) != null && (babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) || babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0)))) {
+            for (int i = 0; i < babs.getSizeInventory(); ++i) { 
+        		if (babs.getStackInSlot(i) != null && (
+                		babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) || 
+                		babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0))
+                		)) {
                     return true;
                 }
             }
@@ -85,27 +112,48 @@ public class GuiVisStorage extends Gui
         return false;
     }
     
-    private boolean isAmuletInInventory(final EntityPlayer player) {
-        return player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 1)) || player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 0));
+    private boolean isAmuletInInventory(final EntityPlayer player) { 
+    		return player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 1)) || 
+            		player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 0));
+        
     }
     
-    private ItemStack getAmuletFromInventory(final IInventory inventory) {
+    private ItemStack getAmuletFromInventory(final IInventory inventory) { 
         for (int i = 0; i < inventory.getSizeInventory(); ++i) {
-            if (inventory.getStackInSlot(i) != null && (inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) || inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0)))) {
+    		if (inventory.getStackInSlot(i) != null && (
+            		inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) ||
+            		inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0)))) {
                 return inventory.getStackInSlot(i);
-            }
+            }            
         }
         return null;
     }
     
     private void render(final Minecraft mc, final int aer, final int terra, final int ignis, final int aqua, final int ordo, final int perditio) {
         if (mc.thePlayer.isSneaking()) {
-            this.drawString(mc.fontRenderer, EnumChatFormatting.GRAY + "Ordo: " + EnumChatFormatting.WHITE + String.valueOf(ordo), 4, this.mHeight - 22, 99);
-            this.drawString(mc.fontRenderer, EnumChatFormatting.AQUA + "Aqua: " + EnumChatFormatting.WHITE + String.valueOf(aqua), 4, this.mHeight - 32, 99);
-            this.drawString(mc.fontRenderer, EnumChatFormatting.RED + "Ignis: " + EnumChatFormatting.WHITE + String.valueOf(ignis), 4, this.mHeight - 42, 99);
-            this.drawString(mc.fontRenderer, EnumChatFormatting.GREEN + "Terra: " + EnumChatFormatting.WHITE + String.valueOf(terra), 4, this.mHeight - 52, 99);
-            this.drawString(mc.fontRenderer, EnumChatFormatting.YELLOW + "Aer: " + EnumChatFormatting.WHITE + String.valueOf(aer), 4, this.mHeight - 62, 99);
-            this.drawString(mc.fontRenderer, EnumChatFormatting.DARK_GRAY + "Perditio: " + EnumChatFormatting.WHITE + String.valueOf(perditio), 4, this.mHeight - 12, 99);
+        	
+        	final ScaledResolution sr = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+            final int l = sr.getScaledHeight();
+            final int dialLocation = ConfigHandler.ThaumcraftSettings.wandDialBottom ? 0 : (l - 32);
+            EntityPlayer player = mc.thePlayer;
+        	
+        	if (!ThaumcraftSettings.wandDialBottom) {
+                this.drawString(mc.fontRenderer, EnumChatFormatting.YELLOW + "Aer: " + EnumChatFormatting.WHITE + String.valueOf(aer), 4, this.mHeight - 62, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.GREEN + "Terra: " + EnumChatFormatting.WHITE + String.valueOf(terra), 4, this.mHeight - 52, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.RED + "Ignis: " + EnumChatFormatting.WHITE + String.valueOf(ignis), 4, this.mHeight - 42, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.AQUA + "Aqua: " + EnumChatFormatting.WHITE + String.valueOf(aqua), 4, this.mHeight - 32, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.GRAY + "Ordo: " + EnumChatFormatting.WHITE + String.valueOf(ordo), 4, this.mHeight - 22, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.DARK_GRAY + "Perditio: " + EnumChatFormatting.WHITE + String.valueOf(perditio), 4, this.mHeight - 12, 99);
+        	}
+        	else {
+        		this.drawString(mc.fontRenderer, EnumChatFormatting.YELLOW + "Aer: " + EnumChatFormatting.WHITE + String.valueOf(aer), 4, dialLocation + 12, 99);                
+                this.drawString(mc.fontRenderer, EnumChatFormatting.GREEN + "Terra: " + EnumChatFormatting.WHITE + String.valueOf(terra), 4, dialLocation + 22, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.RED + "Ignis: " + EnumChatFormatting.WHITE + String.valueOf(ignis), 4, dialLocation + 32, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.AQUA + "Aqua: " + EnumChatFormatting.WHITE + String.valueOf(aqua), 4, dialLocation + 42, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.GRAY + "Ordo: " + EnumChatFormatting.WHITE + String.valueOf(ordo), 4, dialLocation + 52, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.DARK_GRAY + "Perditio: " + EnumChatFormatting.WHITE + String.valueOf(perditio), 4, dialLocation + 62, 99);
+        	}
+        	        	
         }
     }
     
@@ -221,5 +269,16 @@ public class GuiVisStorage extends Gui
             }
         }
         return out;
+    }
+    
+    
+    @SideOnly(Side.CLIENT)
+    public void renderRunicArmorBar(EntityPlayer player)
+    {
+      Minecraft mc = Minecraft.getMinecraft();
+      int total = ((Integer[])Thaumcraft.instance.runicEventHandler.runicInfo.get(Integer.valueOf(player.getEntityId())))[0].intValue();
+      int current = ((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue();
+      
+      this.drawCenteredString(mc.fontRenderer, EnumChatFormatting.GOLD + String.valueOf(current) + EnumChatFormatting.GOLD + " / " + EnumChatFormatting.GOLD + String.valueOf(total), (this.mWidth / 2)-113, this.mHeight - 39, 99);
     }
 }

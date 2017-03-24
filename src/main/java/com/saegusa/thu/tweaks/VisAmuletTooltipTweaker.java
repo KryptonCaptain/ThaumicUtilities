@@ -1,14 +1,17 @@
 package com.saegusa.thu.tweaks;
 
-import thaumcraft.api.aspects.Aspect;
-import net.minecraft.item.ItemStack;
-import com.saegusa.thu.settings.ConfigHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import java.util.Iterator;
-import thaumcraft.api.ItemApi;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import java.text.DecimalFormat;
+import java.util.Iterator;
+
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import thaumcraft.api.ItemApi;
+import thaumcraft.api.aspects.Aspect;
+
+import com.saegusa.thu.settings.ConfigHandler;
+
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,7 +22,10 @@ public class VisAmuletTooltipTweaker
     
     @SubscribeEvent
     public void handleAmuletTooltip(final ItemTooltipEvent event) {
-        if (display() && !GuiScreen.isShiftKeyDown() && (event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) || event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 1))) && event.toolTip.size() > 2) {
+		if (display() && !GuiScreen.isShiftKeyDown() && (
+        		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) || 
+        		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 1))
+        		) && event.toolTip.size() > 2) {
             event.toolTip.set(2, visInformation(event.itemStack));
             final Iterator<String> iter = event.toolTip.iterator();
             while (iter.hasNext()) {

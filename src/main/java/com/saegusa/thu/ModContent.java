@@ -32,7 +32,7 @@ public class ModContent {
 	
 	public static void init()
 	{
-		initializeItems();
+		//initializeItems();
 		initializeBlocks();
 		
 		GameRegistry.registerWorldGenerator((IWorldGenerator)new NetherOreGen(), 0);
@@ -45,14 +45,14 @@ public class ModContent {
 		postInitThaumcraft();
 	}
 	
-	private static void preInitBlocks()
+	private static void preInitBlocks() //reg blocks
 	{
 		GameRegistry.registerBlock(blockNetherOre = new BlockNetherOre().setBlockName("blockNetherOre"), BlockNetherOreItem.class, "blockNetherOre");
         netherOre_renderID = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler((ISimpleBlockRenderingHandler)new BlockOreRenderer());
 	}
 	
-	private static void preInitItems() {
+	private static void preInitItems() { //reg items
 	    //itemAmulet = new ItemAmulet().setUnlocalizedName("ItemAmulet");
 	    //GameRegistry.registerItem(itemAmulet, "ItemAmulet");
 	}
