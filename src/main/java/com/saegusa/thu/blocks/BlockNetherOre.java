@@ -1,18 +1,26 @@
 package com.saegusa.thu.blocks;
 
+import com.saegusa.thu.ModContent;
 import com.saegusa.thu.ThaumicUtilities;
+
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraft.util.MathHelper;
 import thaumcraft.api.ItemApi;
+
 import java.util.ArrayList;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
+
 import com.saegusa.thu.utils.RenderUtils;
+
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.item.ItemStack;
+
 import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,9 +28,13 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+
 import com.saegusa.thu.utils.ThaumcraftUtils;
+
 import net.minecraft.block.material.Material;
+
 import java.util.Random;
+
 import net.minecraft.util.IIcon;
 import net.minecraft.block.Block;
 
@@ -133,6 +145,6 @@ public class BlockNetherOre extends Block
     }
     
     public int getRenderType() {
-        return ThaumicUtilities.netherOre_renderID;
+        return ModContent.netherOre_renderID;
     }
 }

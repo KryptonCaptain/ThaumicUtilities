@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.client.Minecraft;
 import com.saegusa.thu.gui.GuiVisStorage;
-import com.saegusa.thu.settings.ConfigurationHandler;
+import com.saegusa.thu.settings.ConfigHandler;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 
 public class RenderGuiHandler
@@ -16,7 +16,7 @@ public class RenderGuiHandler
         if (event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) {
             return;
         }
-        if (ConfigurationHandler.Settings.displayVis) {
+        if (ConfigHandler.displayVis) {
             new GuiVisStorage(Minecraft.getMinecraft());
         }
     }

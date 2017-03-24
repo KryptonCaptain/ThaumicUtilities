@@ -1,13 +1,20 @@
 package com.saegusa.thu.render;
 
+import com.saegusa.thu.ModContent;
 import com.saegusa.thu.ThaumicUtilities;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.opengl.GL11;
+
 import java.awt.Color;
+
 import net.minecraft.init.Blocks;
+
 import com.saegusa.thu.blocks.BlockNetherOre;
+
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.block.Block;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -66,7 +73,7 @@ public class BlockOreRenderer extends BlockRenderer implements ISimpleBlockRende
     }
     
     public int getRenderId() {
-        return ThaumicUtilities.netherOre_renderID;
+        return ModContent.netherOre_renderID;
     }
     
     static {

@@ -13,7 +13,7 @@ import net.minecraft.util.EnumChatFormatting;
 import thaumcraft.api.ItemApi;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.item.ItemStack;
-import com.saegusa.thu.settings.ConfigurationHandler;
+import com.saegusa.thu.settings.ConfigHandler;
 import net.minecraft.inventory.IInventory;
 import baubles.api.BaublesApi;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,7 +60,7 @@ public class GuiVisStorage extends Gui
             amulet = this.getAmuletFromInventory((IInventory)mc.thePlayer.inventory);
         }
         if (amulet != null) {
-            if (ConfigurationHandler.Settings.displayVisOnShiftDown && !mc.thePlayer.isSneaking()) {
+            if (ConfigHandler.displayVisOnShiftDown && !mc.thePlayer.isSneaking()) {
                 return;
             }
             if (mc.inGameHasFocus && Minecraft.isGuiEnabled()) {
@@ -128,7 +128,7 @@ public class GuiVisStorage extends Gui
         GL11.glLoadIdentity();
         final int k = sr.getScaledWidth();
         final int l = sr.getScaledHeight();
-        final int dialLocation = ConfigurationHandler.ThaumcraftSettings.wandDialBottom ? 0 : (l - 32);
+        final int dialLocation = ConfigHandler.ThaumcraftSettings.wandDialBottom ? 0 : (l - 32);
         GL11.glTranslatef(0.0f, (float)dialLocation, -2000.0f); //fixed being 2px out
         GL11.glColor4f(1.0f, 1.0f, 1.0f, transparency);
         GL11.glEnable(3042);
@@ -151,7 +151,7 @@ public class GuiVisStorage extends Gui
         for (final Aspect aspect : aspects.getAspects()) {
             final int amt = aspects.getAmount(aspect);
             GL11.glPushMatrix();
-            if (ConfigurationHandler.ThaumcraftSettings.wandDialBottom) {
+            if (ConfigHandler.ThaumcraftSettings.wandDialBottom) {
                 GL11.glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
             }
             GL11.glRotatef((float)(-15 + count * 24), 0.0f, 0.0f, 1.0f);

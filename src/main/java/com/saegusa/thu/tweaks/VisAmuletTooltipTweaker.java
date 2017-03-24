@@ -2,7 +2,7 @@ package com.saegusa.thu.tweaks;
 
 import thaumcraft.api.aspects.Aspect;
 import net.minecraft.item.ItemStack;
-import com.saegusa.thu.settings.ConfigurationHandler;
+import com.saegusa.thu.settings.ConfigHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.util.Iterator;
 import thaumcraft.api.ItemApi;
@@ -32,7 +32,7 @@ public class VisAmuletTooltipTweaker
     }
     
     private static boolean display() {
-        return ConfigurationHandler.Settings.tweakVisAmuletTooltip;
+        return ConfigHandler.tweakVisAmuletTooltip;
     }
     
     private static String visInformation(final ItemStack stack) {

@@ -12,7 +12,7 @@ import com.saegusa.thu.blocks.BlockNetherOreItem;
 import com.saegusa.thu.blocks.BlockNetherOre;
 import com.saegusa.thu.render.RenderGuiHandler;
 import net.minecraftforge.common.MinecraftForge;
-import com.saegusa.thu.settings.ConfigurationHandler;
+import com.saegusa.thu.settings.ConfigHandler;
 import java.io.File;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraft.block.Block;
@@ -27,32 +27,33 @@ public class ThaumicUtilities
     public static ThaumicUtilities instance;
     @SidedProxy(serverSide = "com.saegusa.thu.core.ServerProxy", clientSide = "com.saegusa.thu.core.ClientProxy")
     public static IProxy proxy;
-    public static int netherOre_renderID;
-    public static Block blockNetherOre;
+    
     
     @Mod.EventHandler
     public void preInit(final FMLPreInitializationEvent event) {
-        ConfigurationHandler.init(new File(event.getModConfigurationDirectory() + File.separator + "ThaumicUtilities.cfg"), new File(event.getModConfigurationDirectory() + File.separator + "Thaumcraft.cfg"));
+        ConfigHandler.init(new File(event.getModConfigurationDirectory() + File.separator + "ThaumicUtilities.cfg"), new File(event.getModConfigurationDirectory() + File.separator + "Thaumcraft.cfg"));
         MinecraftForge.EVENT_BUS.register((Object)new RenderGuiHandler());
+        
+        ModContent.preInit();
+        
         ThaumicUtilities.proxy.preInit(event);
-        GameRegistry.registerBlock(ThaumicUtilities.blockNetherOre = new BlockNetherOre().setBlockName("blockNetherOre"), (Class)BlockNetherOreItem.class, "blockNetherOre");
-        ThaumicUtilities.netherOre_renderID = RenderingRegistry.getNextAvailableRenderId();
-        RenderingRegistry.registerBlockHandler((ISimpleBlockRenderingHandler)new BlockOreRenderer());
+        
     }
     
     @Mod.EventHandler
     public void init(final FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register((Object)new ConfigurationHandler());
-        GameRegistry.registerWorldGenerator((IWorldGenerator)new NetherOreGen(), 0);
+        MinecraftForge.EVENT_BUS.register((Object)new ConfigHandler());
+        
+        ModContent.init();
+        
         ThaumicUtilities.proxy.init(event);
     }
     
     @Mod.EventHandler
     public void postInit(final FMLPostInitializationEvent event) {
-        ThaumicUtilities.proxy.postInit(event);
+        ModContent.postInit();
+    	
+    	ThaumicUtilities.proxy.postInit(event);
     }
     
-    static {
-        ThaumicUtilities.netherOre_renderID = -1;
-    }
 }
