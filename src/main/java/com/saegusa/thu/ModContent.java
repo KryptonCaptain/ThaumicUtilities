@@ -1,12 +1,10 @@
 package com.saegusa.thu;
 
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 
 import com.saegusa.thu.blocks.BlockNetherOre;
 import com.saegusa.thu.blocks.BlockNetherOreItem;
-import com.saegusa.thu.items.ItemAmulet;
 import com.saegusa.thu.render.BlockOreRenderer;
 import com.saegusa.thu.world.NetherOreGen;
 
@@ -14,9 +12,6 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class ModContent {
 	

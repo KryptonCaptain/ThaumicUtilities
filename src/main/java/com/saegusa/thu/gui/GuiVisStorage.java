@@ -82,15 +82,16 @@ public class GuiVisStorage extends Gui
             	else {
             		this.renderVisStorage(mc, amulet);
             	}
-                
             }
         }
         
-        EntityPlayer player = (EntityPlayer)Minecraft.getMinecraft().renderViewEntity;
-        if ((!player.capabilities.isCreativeMode) && (Thaumcraft.instance.runicEventHandler.runicCharge.containsKey(Integer.valueOf(player.getEntityId()))) && (((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue() > 0) && (Thaumcraft.instance.runicEventHandler.runicInfo.containsKey(Integer.valueOf(player.getEntityId())))) {
-            renderRunicArmorBar(player);
-          }
-        
+        if (ConfigHandler.displayRunic) {
+        	EntityPlayer player = (EntityPlayer)Minecraft.getMinecraft().renderViewEntity;
+            if ((!player.capabilities.isCreativeMode) && (Thaumcraft.instance.runicEventHandler.runicCharge.containsKey(Integer.valueOf(player.getEntityId()))) && (((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue() > 0) && (Thaumcraft.instance.runicEventHandler.runicInfo.containsKey(Integer.valueOf(player.getEntityId())))) 
+            {
+                renderRunicArmorBar(player);
+            }	
+        }
     }
     
     private boolean checkBaubles() {
@@ -279,6 +280,6 @@ public class GuiVisStorage extends Gui
       int total = ((Integer[])Thaumcraft.instance.runicEventHandler.runicInfo.get(Integer.valueOf(player.getEntityId())))[0].intValue();
       int current = ((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue();
       
-      this.drawCenteredString(mc.fontRenderer, EnumChatFormatting.GOLD + String.valueOf(current) + EnumChatFormatting.GOLD + " / " + EnumChatFormatting.GOLD + String.valueOf(total), (this.mWidth / 2)-113, this.mHeight - 39, 99);
+      this.drawCenteredString(mc.fontRenderer, EnumChatFormatting.GOLD + String.valueOf(current) + EnumChatFormatting.GOLD + " / " + EnumChatFormatting.GOLD + String.valueOf(total), (this.mWidth / 2)-113, this.mHeight - 38, 99);
     }
 }

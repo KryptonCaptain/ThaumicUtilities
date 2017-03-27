@@ -510,9 +510,10 @@ public class RenderUtils
         }
     }
     
+    /*
     public static int getGuiXSize(final GuiContainer gui) {
         try {
-            return ReflectionHelper.getPrivateValue((Class)GuiContainer.class, (Object)gui, new String[] { "xSize", "f", "field_146999_f" });
+            return (int)ReflectionHelper.getPrivateValue((Class)GuiContainer.class, (Object)gui, new String[] { "xSize", "f", "field_146999_f" });
         }
         catch (Exception ex) {
             return 0;
@@ -521,7 +522,7 @@ public class RenderUtils
     
     public static int getGuiYSize(final GuiContainer gui) {
         try {
-            return ReflectionHelper.getPrivateValue((Class)GuiContainer.class, (Object)gui, new String[] { "ySize", "g", "field_147000_g" });
+            return (int)ReflectionHelper.getPrivateValue((Class)GuiContainer.class, (Object)gui, new String[] { "ySize", "g", "field_147000_g" });
         }
         catch (Exception ex) {
             return 0;
@@ -530,12 +531,13 @@ public class RenderUtils
     
     public static float getGuiZLevel(final Gui gui) {
         try {
-            return ReflectionHelper.getPrivateValue((Class)Gui.class, (Object)gui, new String[] { "zLevel", "e", "field_73735_i" });
+            return (float)ReflectionHelper.getPrivateValue((Class)Gui.class, (Object)gui, new String[] { "zLevel", "e", "field_73735_i" });
         }
         catch (Exception ex) {
             return 0.0f;
         }
     }
+    */
     
     public static ResourceLocation getParticleTexture() {
         try {
