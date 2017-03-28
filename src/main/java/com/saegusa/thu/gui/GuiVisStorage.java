@@ -140,7 +140,7 @@ public class GuiVisStorage extends Gui
         	
         	if (!ThaumcraftSettings.wandDialBottom) {
                 this.drawString(mc.fontRenderer, EnumChatFormatting.YELLOW + "Aer: " + EnumChatFormatting.WHITE + String.valueOf(aer), 4, this.mHeight - 62, 99);
-                this.drawString(mc.fontRenderer, EnumChatFormatting.GREEN + "Terra: " + EnumChatFormatting.WHITE + String.valueOf(terra), 4, this.mHeight - 52, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.DARK_GREEN + "Terra: " + EnumChatFormatting.WHITE + String.valueOf(terra), 4, this.mHeight - 52, 99);
                 this.drawString(mc.fontRenderer, EnumChatFormatting.RED + "Ignis: " + EnumChatFormatting.WHITE + String.valueOf(ignis), 4, this.mHeight - 42, 99);
                 this.drawString(mc.fontRenderer, EnumChatFormatting.AQUA + "Aqua: " + EnumChatFormatting.WHITE + String.valueOf(aqua), 4, this.mHeight - 32, 99);
                 this.drawString(mc.fontRenderer, EnumChatFormatting.GRAY + "Ordo: " + EnumChatFormatting.WHITE + String.valueOf(ordo), 4, this.mHeight - 22, 99);
@@ -148,7 +148,7 @@ public class GuiVisStorage extends Gui
         	}
         	else {
         		this.drawString(mc.fontRenderer, EnumChatFormatting.YELLOW + "Aer: " + EnumChatFormatting.WHITE + String.valueOf(aer), 4, dialLocation + 12, 99);                
-                this.drawString(mc.fontRenderer, EnumChatFormatting.GREEN + "Terra: " + EnumChatFormatting.WHITE + String.valueOf(terra), 4, dialLocation + 22, 99);
+                this.drawString(mc.fontRenderer, EnumChatFormatting.DARK_GREEN + "Terra: " + EnumChatFormatting.WHITE + String.valueOf(terra), 4, dialLocation + 22, 99);
                 this.drawString(mc.fontRenderer, EnumChatFormatting.RED + "Ignis: " + EnumChatFormatting.WHITE + String.valueOf(ignis), 4, dialLocation + 32, 99);
                 this.drawString(mc.fontRenderer, EnumChatFormatting.AQUA + "Aqua: " + EnumChatFormatting.WHITE + String.valueOf(aqua), 4, dialLocation + 42, 99);
                 this.drawString(mc.fontRenderer, EnumChatFormatting.GRAY + "Ordo: " + EnumChatFormatting.WHITE + String.valueOf(ordo), 4, dialLocation + 52, 99);

@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
@@ -54,7 +55,7 @@ public class VisAmuletTooltipTweaker
                     if (tt.length() > 0) {
                         tt += " | ";
                     }
-                    tt = tt + "§" + aspect.getChatcolor() + amount + "§r";
+                    tt = tt + "\u00a7" + aspect.getChatcolor() + amount + EnumChatFormatting.RESET;
                 }
                 else {
                     stack.stackTagCompound.setInteger(aspect.getTag(), 0);
@@ -62,7 +63,14 @@ public class VisAmuletTooltipTweaker
             }
             return tt;
         }
-        return "§e0 §r| §20 §r| §c0 §r| §30 §r| §70 §r| §80";
+        return (EnumChatFormatting.YELLOW + "0 " + EnumChatFormatting.RESET + "| " + 
+        		EnumChatFormatting.DARK_GREEN + "0 " + EnumChatFormatting.RESET + "| " + 
+        		EnumChatFormatting.RED + "0 " + EnumChatFormatting.RESET + "| " + 
+        		EnumChatFormatting.DARK_AQUA + "0 " + EnumChatFormatting.RESET + "| " + 
+        		EnumChatFormatting.GRAY + "0 " + EnumChatFormatting.RESET + "| " + 
+        		EnumChatFormatting.DARK_GRAY + "0 " + EnumChatFormatting.RESET         		
+        		);
+        		//"§e0 §r| §20 §r| §c0 §r| §30 §r| §70 §r| §80";
     }
     
     static {
