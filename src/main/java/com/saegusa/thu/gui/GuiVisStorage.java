@@ -52,6 +52,17 @@ public class GuiVisStorage extends Gui
         int ignis = 0;
         int ordo = 0;
         int perditio = 0;
+        
+        if (ConfigHandler.displayRunic) {
+        	EntityPlayer player = (EntityPlayer)Minecraft.getMinecraft().renderViewEntity;
+            if ((!player.capabilities.isCreativeMode) && (Thaumcraft.instance.runicEventHandler.runicCharge.containsKey(Integer.valueOf(player.getEntityId()))) && (((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue() > 0) && (Thaumcraft.instance.runicEventHandler.runicInfo.containsKey(Integer.valueOf(player.getEntityId())))) 
+            {
+                this.renderRunicArmorBar(player);
+            }	
+        }
+        
+        
+        
         if (!this.isAmuletInBaubles((EntityPlayer)mc.thePlayer) && !this.isAmuletInInventory((EntityPlayer)mc.thePlayer)) {
             return;
         }
@@ -84,14 +95,7 @@ public class GuiVisStorage extends Gui
             	}
             }
         }
-        
-        if (ConfigHandler.displayRunic) {
-        	EntityPlayer player = (EntityPlayer)Minecraft.getMinecraft().renderViewEntity;
-            if ((!player.capabilities.isCreativeMode) && (Thaumcraft.instance.runicEventHandler.runicCharge.containsKey(Integer.valueOf(player.getEntityId()))) && (((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue() > 0) && (Thaumcraft.instance.runicEventHandler.runicInfo.containsKey(Integer.valueOf(player.getEntityId())))) 
-            {
-                renderRunicArmorBar(player);
-            }	
-        }
+        //old runic loc
     }
     
     private boolean checkBaubles() {
