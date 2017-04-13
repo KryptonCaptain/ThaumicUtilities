@@ -10,6 +10,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
 
+import com.saegusa.thu.ModCompat;
 import com.saegusa.thu.settings.ConfigHandler;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -25,7 +26,9 @@ public class VisAmuletTooltipTweaker
     public void handleAmuletTooltip(final ItemTooltipEvent event) {
 		if (display() && !GuiScreen.isShiftKeyDown() && (
         		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) || 
-        		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 1))
+        		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) ||
+        		//TODO FM support
+        		(ModCompat.FMsubCollar!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.FMsubCollar)))
         		) && event.toolTip.size() > 2) {
             event.toolTip.set(2, visInformation(event.itemStack));
             final Iterator<String> iter = event.toolTip.iterator();

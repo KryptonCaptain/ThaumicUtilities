@@ -3,7 +3,7 @@
   "modid": "thutilities",
   "name": "Thaumic Utilities",
   "description": "Add more utility to your thaumaturgy.",
-  "version": "0.04a",
+  "version": "${version}",
   "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
