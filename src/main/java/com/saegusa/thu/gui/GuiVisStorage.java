@@ -21,6 +21,7 @@ import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.Thaumcraft;
 import baubles.api.BaublesApi;
 
+import com.saegusa.thu.ModCompat;
 import com.saegusa.thu.settings.ConfigHandler;
 import com.saegusa.thu.settings.ConfigHandler.ThaumcraftSettings;
 import com.saegusa.thu.utils.RenderUtils;
@@ -108,7 +109,9 @@ public class GuiVisStorage extends Gui
             for (int i = 0; i < babs.getSizeInventory(); ++i) { 
         		if (babs.getStackInSlot(i) != null && (
                 		babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) || 
-                		babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0))
+                		babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) ||
+                		//TODO FM support
+                		(ModCompat.FMsubCollar!=null && babs.getStackInSlot(i).isItemEqual(new ItemStack(ModCompat.FMsubCollar)))
                 		)) {
                     return true;
                 }
@@ -119,7 +122,10 @@ public class GuiVisStorage extends Gui
     
     private boolean isAmuletInInventory(final EntityPlayer player) { 
     		return player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 1)) || 
-            		player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 0));
+            		player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 0)) ||
+            		//TODO FM support
+            		player.inventory.hasItemStack(new ItemStack(ModCompat.FMsubCollar))
+            		;
         
     }
     
@@ -127,7 +133,10 @@ public class GuiVisStorage extends Gui
         for (int i = 0; i < inventory.getSizeInventory(); ++i) {
     		if (inventory.getStackInSlot(i) != null && (
             		inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) ||
-            		inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0)))) {
+            		inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) ||
+            		//TODO FM support
+            		(ModCompat.FMsubCollar!=null && inventory.getStackInSlot(i).isItemEqual(new ItemStack(ModCompat.FMsubCollar)))
+            		)) {
                 return inventory.getStackInSlot(i);
             }            
         }
@@ -195,6 +204,10 @@ public class GuiVisStorage extends Gui
         int max;
         if (amulet.isItemEqual(ItemApi.getItem("itemAmuletVis", 1))) {
             max = 25000;
+        }
+        //TODO FM support
+        else if (ModCompat.FMsubCollar!=null && (amulet.isItemEqual(new ItemStack(ModCompat.FMsubCollar))) ) {
+        	max = 25000;
         }
         else {
             max = 2500;

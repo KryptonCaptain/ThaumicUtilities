@@ -14,7 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = "thutilities", name = "Thaumic Utilities", version = "@version")
+@Mod(modid = "thutilities", name = "Thaumic Utilities", version = "${version}")
 public class ThaumicUtilities
 {
     @Mod.Instance("thutilities")
@@ -54,6 +54,7 @@ public class ThaumicUtilities
     	if (!ConfigHandler.clientMode) {
             ModContent.postInit();        	
         }
+    	ModCompat.init();
 
     	
     	ThaumicUtilities.proxy.postInit(event);
