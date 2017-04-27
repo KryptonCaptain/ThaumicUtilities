@@ -6,9 +6,11 @@ import java.util.Iterator;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.common.lib.events.EventHandlerRunic;
 
 import com.saegusa.thu.ModCompat;
 import com.saegusa.thu.settings.ConfigHandler;
@@ -25,19 +27,24 @@ public class VisAmuletTooltipTweaker
     @SubscribeEvent
     public void handleAmuletTooltip(final ItemTooltipEvent event) {
 		if (display() && !GuiScreen.isShiftKeyDown() && (
-        		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) || 
-        		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) ||
-        		//TODO FM support
-        		(ModCompat.FMsubCollar!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.FMsubCollar)))
-        		) && event.toolTip.size() > 2) {
-            event.toolTip.set(2, visInformation(event.itemStack));
-            final Iterator<String> iter = event.toolTip.iterator();
-            while (iter.hasNext()) {
-                final String str = iter.next();
-                if (event.toolTip.indexOf(str) > 2) {
-                    iter.remove();
-                }
-            }
+	        		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) || 
+	        		event.itemStack.isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) ||
+	        		(ModCompat.FMsubCollar!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.FMsubCollar)))) //FM support
+        		&& event.toolTip.size() > 0) {
+						//System.out.println("event.toolTip.size()"+event.toolTip.size());
+			            event.toolTip.add(2, visInformation(event.itemStack));
+			            final Iterator<String> iter = event.toolTip.iterator();
+			            while (iter.hasNext()) {
+			                final String str = iter.next();
+			                if (event.toolTip.indexOf(str) > 2) {
+			                    iter.remove();
+			                }
+			            }
+			            //WIP
+			            final int charge = EventHandlerRunic.getFinalCharge(event.itemStack);
+			            if (charge > 0) {
+			                event.toolTip.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("item.runic.charge") + " +" + charge);
+			            }
         }
     }
     
@@ -66,6 +73,7 @@ public class VisAmuletTooltipTweaker
             }
             return tt;
         }
+        
         return (EnumChatFormatting.YELLOW + "0 " + EnumChatFormatting.RESET + "| " + 
         		EnumChatFormatting.DARK_GREEN + "0 " + EnumChatFormatting.RESET + "| " + 
         		EnumChatFormatting.RED + "0 " + EnumChatFormatting.RESET + "| " + 
@@ -74,6 +82,7 @@ public class VisAmuletTooltipTweaker
         		EnumChatFormatting.DARK_GRAY + "0 " + EnumChatFormatting.RESET         		
         		);
         		//"§e0 §r| §20 §r| §c0 §r| §30 §r| §70 §r| §80";
+        
     }
     
     static {
