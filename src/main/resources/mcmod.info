@@ -7,7 +7,7 @@
   "mcversion": "1.7.10",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Saegusa"],
+  "authorList": ["Saegusa", "KryptonCaptain"],
   "credits": "The Forge and FML guys, for making this possible",
   "logoFile": "",
   "requiredMods": [ "thaumcraft" ],
