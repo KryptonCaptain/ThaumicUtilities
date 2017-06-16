@@ -6,13 +6,13 @@ import java.util.Iterator;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
-
+import thaumcraft.common.lib.events.EventHandlerRunic;
 import thaumicUtilities.ModCompat;
 import thaumicUtilities.settings.ConfigHandler;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,12 +31,20 @@ public class VisAmuletTooltipTweaker
         		(ModCompat.FMsubCollar!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.FMsubCollar)))
         		) && event.toolTip.size() > 2) {
             event.toolTip.set(2, visInformation(event.itemStack));
+            event.itemStack.getEnchantmentTagList();
+            
             final Iterator<String> iter = event.toolTip.iterator();
-            while (iter.hasNext()) {
+            while (iter.hasNext() ) {
                 final String str = iter.next();
                 if (event.toolTip.indexOf(str) > 2) {
                     iter.remove();
                 }
+            }
+            
+            //Add runic charge to alt tooltip
+            int charge = EventHandlerRunic.getFinalCharge(event.itemStack);
+            if (charge > 0) {
+              event.toolTip.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("item.runic.charge") + " +" + charge);
             }
         }
     }
