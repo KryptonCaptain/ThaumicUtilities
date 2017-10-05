@@ -53,7 +53,7 @@ public class GuiVisStorage extends Gui
         int perditio = 0;
         
         if (ConfigHandler.displayRunic) {
-        	EntityPlayer player = (EntityPlayer)Minecraft.getMinecraft().renderViewEntity;
+        	EntityPlayer player = mc.thePlayer;  //TODO fix this shit
             if ((!player.capabilities.isCreativeMode) && (Thaumcraft.instance.runicEventHandler.runicCharge.containsKey(Integer.valueOf(player.getEntityId()))) && (((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue() > 0) && (Thaumcraft.instance.runicEventHandler.runicInfo.containsKey(Integer.valueOf(player.getEntityId())))) 
             {
                 this.renderRunicArmorBar(player);
@@ -108,7 +108,7 @@ public class GuiVisStorage extends Gui
         		if (babs.getStackInSlot(i) != null && (
                 		babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) || 
                 		babs.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) ||
-                		//TODO FM support
+                		//FM support
                 		(ModCompat.FMsubCollar!=null && babs.getStackInSlot(i).isItemEqual(new ItemStack(ModCompat.FMsubCollar)))
                 		)) {
                     return true;
@@ -121,7 +121,7 @@ public class GuiVisStorage extends Gui
     private boolean isAmuletInInventory(final EntityPlayer player) { 
     		return player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 1)) || 
             		player.inventory.hasItemStack(ItemApi.getItem("itemAmuletVis", 0)) ||
-            		//TODO FM support
+            		//FM support
             		player.inventory.hasItemStack(new ItemStack(ModCompat.FMsubCollar))
             		;
         
@@ -132,7 +132,7 @@ public class GuiVisStorage extends Gui
     		if (inventory.getStackInSlot(i) != null && (
             		inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 1)) ||
             		inventory.getStackInSlot(i).isItemEqual(ItemApi.getItem("itemAmuletVis", 0)) ||
-            		//TODO FM support
+            		//FM support
             		(ModCompat.FMsubCollar!=null && inventory.getStackInSlot(i).isItemEqual(new ItemStack(ModCompat.FMsubCollar)))
             		)) {
                 return inventory.getStackInSlot(i);
@@ -203,7 +203,7 @@ public class GuiVisStorage extends Gui
         if (amulet.isItemEqual(ItemApi.getItem("itemAmuletVis", 1))) {
             max = 25000;
         }
-        //TODO FM support
+        //FM support
         else if (ModCompat.FMsubCollar!=null && (amulet.isItemEqual(new ItemStack(ModCompat.FMsubCollar))) ) {
         	max = 25000;
         }

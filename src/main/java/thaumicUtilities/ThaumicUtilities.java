@@ -26,7 +26,7 @@ public class ThaumicUtilities
     @Mod.EventHandler
     public void preInit(final FMLPreInitializationEvent event) {
         ConfigHandler.init(new File(event.getModConfigurationDirectory() + File.separator + "ThaumicUtilities.cfg"), new File(event.getModConfigurationDirectory() + File.separator + "Thaumcraft.cfg"));
-        MinecraftForge.EVENT_BUS.register((Object)new RenderGuiHandler());
+        MinecraftForge.EVENT_BUS.register(new RenderGuiHandler());
         
         if (!ConfigHandler.clientMode) {
             ModContent.preInit();        	
@@ -39,7 +39,7 @@ public class ThaumicUtilities
     
     @Mod.EventHandler
     public void init(final FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register((Object)new ConfigHandler());
+        MinecraftForge.EVENT_BUS.register(new ConfigHandler());
         
         if (!ConfigHandler.clientMode) {
             ModContent.init();        	
