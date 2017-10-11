@@ -24,6 +24,7 @@ public class ConfigHandler
     
     public static boolean displayRunic;
     public static boolean clientMode;
+    public static boolean tweakSanityTooltip;
 
     
     public static void init(final File configFile, final File thaumcraftConfig) {
@@ -50,6 +51,8 @@ public class ConfigHandler
         netherOreRarity = config.getInt("netherOreRarity", "worldgen", 4, 0, 12, "Ore generation rarity in the nether");
         
         displayRunic = config.getBoolean("displayRunicHUD", "general.render", true, "Displays current runic shielding amounts as numbers next to the health bar.");
+        
+        tweakSanityTooltip = config.getBoolean("sanityMeterTooltipTweak", "general.tweaks", true, "Tweak the Sanity Meter to display numeric warp values in the tooltip.");
         
         clientMode = config.getBoolean("clientMode", "general", false, "Disables the mod's blocks/items from registering. Only render/tweaks changes will remain.");
         

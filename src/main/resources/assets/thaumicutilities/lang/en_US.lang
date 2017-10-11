@@ -6,3 +6,8 @@ tile.blockNetherOre.3.name=Earth Infused Netherrack
 tile.blockNetherOre.4.name=Order Infused Netherrack
 tile.blockNetherOre.5.name=Entropy Infused Netherrack
 tile.blockNetherOre.6.name=Nether Amber Ore
+
+# Util
+util.warp.perm=Permanent warp
+util.warp.sticky=Sticky warp
+util.warp.temp=Temporary warp

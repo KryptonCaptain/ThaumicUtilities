@@ -4,12 +4,14 @@ import java.text.DecimalFormat;
 import java.util.Iterator;
 
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.lib.events.EventHandlerRunic;
 import thaumicUtilities.ModCompat;
 import thaumicUtilities.settings.ConfigHandler;
@@ -87,4 +89,24 @@ public class VisAmuletTooltipTweaker
     static {
         VisAmuletTooltipTweaker.formatter = new DecimalFormat("#######.##");
     }
+    
+    
+    @SubscribeEvent
+    public void handleSanityTooltip(final ItemTooltipEvent event) {
+		if (ConfigHandler.tweakSanityTooltip && 
+        		event.itemStack.isItemEqual(ItemApi.getItem("itemSanityChecker", 0)) ) {
+			
+			EntityPlayer player = event.entityPlayer;
+
+			int permwarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpPerm(player.getCommandSenderName());
+			int stickywarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpSticky(player.getCommandSenderName());
+			int tempwarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpTemp(player.getCommandSenderName());
+
+			event.toolTip.add(EnumChatFormatting.DARK_PURPLE + " - " + permwarp + " " +  StatCollector.translateToLocal("util.warp.perm") );
+			event.toolTip.add(EnumChatFormatting.LIGHT_PURPLE + " - " + stickywarp + " " +  StatCollector.translateToLocal("util.warp.sticky") );
+			event.toolTip.add(EnumChatFormatting.GRAY + " - " + tempwarp + " " + StatCollector.translateToLocal("util.warp.temp") );
+			
+        }
+    }
+    
 }
