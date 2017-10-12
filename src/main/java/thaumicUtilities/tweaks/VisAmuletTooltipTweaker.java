@@ -12,6 +12,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
+import thaumcraft.common.items.relics.ItemSanityChecker;
 import thaumcraft.common.lib.events.EventHandlerRunic;
 import thaumicUtilities.ModCompat;
 import thaumicUtilities.settings.ConfigHandler;
@@ -93,18 +94,33 @@ public class VisAmuletTooltipTweaker
     
     @SubscribeEvent
     public void handleSanityTooltip(final ItemTooltipEvent event) {
+    	EntityPlayer player = event.entityPlayer;
 		if (ConfigHandler.tweakSanityTooltip && 
-        		event.itemStack.isItemEqual(ItemApi.getItem("itemSanityChecker", 0)) ) {
+        		event.itemStack.isItemEqual(ItemApi.getItem("itemSanityChecker", 0)) &&
+        		( player.inventory.getCurrentItem() != null && 
+        		player.inventory.getCurrentItem().getItem() instanceof ItemSanityChecker)
+				) {
 			
-			EntityPlayer player = event.entityPlayer;
-
 			int permwarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpPerm(player.getCommandSenderName());
 			int stickywarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpSticky(player.getCommandSenderName());
 			int tempwarp = Thaumcraft.proxy.getPlayerKnowledge().getWarpTemp(player.getCommandSenderName());
+			
+			int warp = permwarp+stickywarp+tempwarp;
+			
+			if (GuiScreen.isShiftKeyDown()) {
+				if (tempwarp> 0 ) 
+				event.toolTip.add(EnumChatFormatting.GRAY + " - " + tempwarp + " " + StatCollector.translateToLocal("util.warp.temp") );
+				if (stickywarp > 0)
+				event.toolTip.add(EnumChatFormatting.LIGHT_PURPLE + " - " + stickywarp + " " +  StatCollector.translateToLocal("util.warp.sticky") );
+				if (permwarp > 0)
+				event.toolTip.add(EnumChatFormatting.DARK_PURPLE + " - " + permwarp + " " +  StatCollector.translateToLocal("util.warp.perm") );
 
-			event.toolTip.add(EnumChatFormatting.DARK_PURPLE + " - " + permwarp + " " +  StatCollector.translateToLocal("util.warp.perm") );
-			event.toolTip.add(EnumChatFormatting.LIGHT_PURPLE + " - " + stickywarp + " " +  StatCollector.translateToLocal("util.warp.sticky") );
-			event.toolTip.add(EnumChatFormatting.GRAY + " - " + tempwarp + " " + StatCollector.translateToLocal("util.warp.temp") );
+			} else {
+				if (warp > 0) {
+					event.toolTip.add(EnumChatFormatting.DARK_PURPLE + " - " + warp + " " +  StatCollector.translateToLocal("util.warp") );
+					event.toolTip.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("util.shift") );
+				}
+			}
 			
         }
     }
