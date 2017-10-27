@@ -14,6 +14,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.items.relics.ItemSanityChecker;
 import thaumcraft.common.lib.events.EventHandlerRunic;
+import thaumcraft.common.lib.research.ResearchManager;
 import thaumicUtilities.ModCompat;
 import thaumicUtilities.settings.ConfigHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -96,6 +97,7 @@ public class VisAmuletTooltipTweaker
     public void handleSanityTooltip(final ItemTooltipEvent event) {
     	EntityPlayer player = event.entityPlayer;
 		if (ConfigHandler.tweakSanityTooltip && 
+				ResearchManager.isResearchComplete(player.getCommandSenderName(), "SANITYCHECK") &&
         		event.itemStack.isItemEqual(ItemApi.getItem("itemSanityChecker", 0)) &&
         		( player.inventory.getCurrentItem() != null && 
         		player.inventory.getCurrentItem().getItem() instanceof ItemSanityChecker)
