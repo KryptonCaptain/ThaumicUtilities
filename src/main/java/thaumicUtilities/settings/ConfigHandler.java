@@ -54,7 +54,7 @@ public class ConfigHandler
         
         tweakSanityTooltip = config.getBoolean("sanityMeterTooltipTweak", "general.tweaks", true, "Tweak the Sanity Meter to display numeric warp values in the tooltip.");
         
-        clientMode = config.getBoolean("clientMode", "general", false, "Disables the mod's blocks/items from registering. Only render/tweaks changes will remain.");
+        clientMode = config.getBoolean("clientMode", "general", true, "Disables the mod's blocks/items from registering. Only render/tweaks changes will remain.");
         
         if (config.hasChanged()) {
             config.save();
