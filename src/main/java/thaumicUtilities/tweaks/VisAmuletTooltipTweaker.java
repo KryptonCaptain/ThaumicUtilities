@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
@@ -125,6 +126,44 @@ public class VisAmuletTooltipTweaker
 			}
 			
         }
+    }
+    
+    
+    @SubscribeEvent
+    public void handleSanguineTooltip(final ItemTooltipEvent event) {
+		if (display() /*&& !GuiScreen.isShiftKeyDown()*/ && (
+        		//TODO BM support
+        		(ModCompat.BMSanguineHelm!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.BMSanguineHelm))) ||
+        		(ModCompat.BMSanguineChest!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.BMSanguineChest))) ||
+        		(ModCompat.BMSanguineLegs!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.BMSanguineLegs))) ||
+        		(ModCompat.BMSanguineBoots!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.BMSanguineBoots))) 
+        		) && event.toolTip.size() > 2) {
+            //event.toolTip.set(1, visInformation(event.itemStack));
+            //event.itemStack.getEnchantmentTagList();
+			EntityPlayer player = event.entityPlayer;
+			int charge = getFinalVis(event.itemStack, player, null);
+			//event.toolTip.remove(1);
+
+            final Iterator<String> iter = event.toolTip.iterator();
+            while (iter.hasNext() ) {
+                final String str = iter.next();
+                if (event.toolTip.indexOf(str) == 2 || event.toolTip.indexOf(str) == 3) {
+                    iter.remove();
+                }
+            }
+            
+            event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + charge + "%");
+
+        }
+    }
+    
+    public static int getFinalVis(ItemStack stack, EntityPlayer player, Aspect aspect)
+    {
+      if ((stack == null) || (!(stack.getItem() instanceof IVisDiscountGear))) {
+        return 0;
+      }
+      IVisDiscountGear armor = (IVisDiscountGear)stack.getItem();
+      return armor.getVisDiscount(stack, player, aspect);
     }
     
 }

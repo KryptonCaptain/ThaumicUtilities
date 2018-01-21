@@ -3,18 +3,25 @@ package thaumicUtilities;
 import java.io.File;
 
 import net.minecraftforge.common.MinecraftForge;
-
+import thaumcraft.api.aspects.Aspect;
 import thaumicUtilities.core.IProxy;
 import thaumicUtilities.render.RenderGuiHandler;
 import thaumicUtilities.settings.ConfigHandler;
-
+import thaumicUtilities.tweaks.DontNoticeMeGuardianSenpai;
+import thaumicUtilities.tweaks.VisAmuletTooltipTweaker;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = "thutilities", name = "Thaumic Utilities", version = "${version}")
+@Mod(
+		modid = "thutilities", 
+		name = "Thaumic Utilities", 
+		version = "${version}",
+		dependencies = "required-after:Thaumcraft@[4.2.3.5,)"
+	)
+
 public class ThaumicUtilities
 {
     @Mod.Instance("thutilities")
@@ -31,7 +38,6 @@ public class ThaumicUtilities
         if (!ConfigHandler.clientMode) {
             ModContent.preInit();        	
         }
-
         
         ThaumicUtilities.proxy.preInit(event);
         
@@ -56,8 +62,37 @@ public class ThaumicUtilities
         }
     	ModCompat.init();
 
+    	if (ConfigHandler.noStepOnGuardian)
+    		MinecraftForge.EVENT_BUS.register(new DontNoticeMeGuardianSenpai());
     	
     	ThaumicUtilities.proxy.postInit(event);
+    	
+    	/* //thing I was using to get RGB vals for aspect colours
+    	int color = 47616;	
+		
+		int red = (color >> 16) & 0xff;
+		int green = (color >> 8) & 0xff;
+		int blue = color & 0xff;
+		
+		System.out.println("------------------------");
+		System.out.println("R"+red);
+		System.out.println("G"+green);
+		System.out.println("B"+blue);
+		System.out.println("------------------------");
+		*/
+    	/*
+    	//same thing in reverse
+    	int red0 = 119;
+    	int green0 = 117;
+    	int blue0 = 97;
+    	
+    	int c = (red0 << 16) + (green0 << 8) + (blue0);
+    	
+    	
+    	System.out.println("------------------------");
+		System.out.println("c"+c);
+		System.out.println("------------------------");
+    	*/
     }
     
 }
