@@ -27,7 +27,7 @@ public class ClientProxy extends CommonProxy
     
     @Override
     public void init(final FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register((Object)new VisAmuletTooltipTweaker());
+        MinecraftForge.EVENT_BUS.register(new VisAmuletTooltipTweaker());
     }
     
     @Override

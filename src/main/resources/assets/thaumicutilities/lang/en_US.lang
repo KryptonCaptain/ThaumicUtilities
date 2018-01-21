@@ -13,3 +13,4 @@ util.warp.perm=Permanent warp
 util.warp.sticky=Sticky warp
 util.warp.temp=Temporary warp
 util.shift=Press SHIFT for details
+util.noHitGuardian=§oYou cannot yet comprehend how to damage these creatures
