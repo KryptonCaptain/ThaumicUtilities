@@ -27,6 +27,7 @@ public class ConfigHandler
     public static boolean tweakSanityTooltip;
     
     public static boolean noStepOnGuardian;
+    public static boolean fireproofRunic;
 
     
     public static void init(final File configFile, final File thaumcraftConfig) {
@@ -56,9 +57,11 @@ public class ConfigHandler
         
         tweakSanityTooltip = config.getBoolean("sanityMeterTooltipTweak", "general.tweaks", true, "Tweak the Sanity Meter to display numeric warp values in the tooltip. (Requires research unlocked, and to be in hand)");
         
-        clientMode = config.getBoolean("clientMode", "general", true, "Disables the mod's blocks/items from registering. Only render/tweaks changes will remain.");
+        clientMode = config.getBoolean("functionsOnly", "general", true, "Disables the mod's blocks/items from registering. Only render/tweaks changes will remain.");
         
         noStepOnGuardian = config.getBoolean("guardianWarpAttackThreshold", "general.tweaks", false, "Will prevent Eldritch Guardians from attacking you until a research milestone or warp level is reached.");
+        
+        fireproofRunic = config.getBoolean("fireproofRunic", "general.tweaks", true, "Runic Shields will extinguish fire on you, but not prevent you from taking damage");
         
         if (config.hasChanged()) {
             config.save();

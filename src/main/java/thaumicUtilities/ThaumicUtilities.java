@@ -8,6 +8,7 @@ import thaumicUtilities.core.IProxy;
 import thaumicUtilities.render.RenderGuiHandler;
 import thaumicUtilities.settings.ConfigHandler;
 import thaumicUtilities.tweaks.DontNoticeMeGuardianSenpai;
+import thaumicUtilities.tweaks.FireproofRunic;
 import thaumicUtilities.tweaks.VisAmuletTooltipTweaker;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -64,35 +65,12 @@ public class ThaumicUtilities
 
     	if (ConfigHandler.noStepOnGuardian)
     		MinecraftForge.EVENT_BUS.register(new DontNoticeMeGuardianSenpai());
+    	if (ConfigHandler.fireproofRunic)
+    		MinecraftForge.EVENT_BUS.register(new FireproofRunic());
     	
     	ThaumicUtilities.proxy.postInit(event);
     	
-    	/* //thing I was using to get RGB vals for aspect colours
-    	int color = 47616;	
-		
-		int red = (color >> 16) & 0xff;
-		int green = (color >> 8) & 0xff;
-		int blue = color & 0xff;
-		
-		System.out.println("------------------------");
-		System.out.println("R"+red);
-		System.out.println("G"+green);
-		System.out.println("B"+blue);
-		System.out.println("------------------------");
-		*/
-    	/*
-    	//same thing in reverse
-    	int red0 = 119;
-    	int green0 = 117;
-    	int blue0 = 97;
     	
-    	int c = (red0 << 16) + (green0 << 8) + (blue0);
-    	
-    	
-    	System.out.println("------------------------");
-		System.out.println("c"+c);
-		System.out.println("------------------------");
-    	*/
     }
     
 }
