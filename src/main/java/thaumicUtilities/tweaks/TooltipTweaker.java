@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -12,6 +13,9 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.wands.StaffRod;
+import thaumcraft.api.wands.WandCap;
+import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.items.relics.ItemSanityChecker;
 import thaumcraft.common.lib.events.EventHandlerRunic;
@@ -23,9 +27,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class VisAmuletTooltipTweaker
+public class TooltipTweaker
 {
-    static DecimalFormat formatter;
+    static DecimalFormat formatter = new DecimalFormat("#######.##");
     
     @SubscribeEvent
     public void handleAmuletTooltip(final ItemTooltipEvent event) {
@@ -65,7 +69,7 @@ public class VisAmuletTooltipTweaker
             int num = 0;
             for (final Aspect aspect : Aspect.getPrimalAspects()) {
                 if (stack.stackTagCompound.hasKey(aspect.getTag())) {
-                    final String amount = VisAmuletTooltipTweaker.formatter.format(stack.stackTagCompound.getInteger(aspect.getTag()) / 100.0f);
+                    final String amount = TooltipTweaker.formatter.format(stack.stackTagCompound.getInteger(aspect.getTag()) / 100.0f);
                     ++num;
                     final String text = "";
                     if (tt.length() > 0) {
@@ -87,10 +91,6 @@ public class VisAmuletTooltipTweaker
         		EnumChatFormatting.DARK_GRAY + "0 " + EnumChatFormatting.RESET         		
         		);
         		//"§e0 §r| §20 §r| §c0 §r| §30 §r| §70 §r| §80";
-    }
-    
-    static {
-        VisAmuletTooltipTweaker.formatter = new DecimalFormat("#######.##");
     }
     
     
@@ -164,6 +164,37 @@ public class VisAmuletTooltipTweaker
       }
       IVisDiscountGear armor = (IVisDiscountGear)stack.getItem();
       return armor.getVisDiscount(stack, player, aspect);
+    }
+    
+    
+    @SubscribeEvent
+    public void handleWandPartTooltip(final ItemTooltipEvent event) {
+    	EntityPlayer player = event.entityPlayer;
+		if (ConfigHandler.wandPartStats && !event.itemStack.isItemEqual(new ItemStack(Items.stick)) ) {
+			
+			for (WandCap wc : WandCap.caps.values()) {
+				if (checkItemEquals(event.itemStack, wc.getItem())) {
+					int discount = (int)(100-(100*wc.getBaseCostModifier() ));
+					event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + discount + "%");
+		        }
+			}
+			
+			for (WandRod wr : WandRod.rods.values()) {
+				if (checkItemEquals(event.itemStack, wr.getItem()) ) {
+					int discount = (int)(wr.getCapacity() );
+					event.toolTip.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tc.viscapacity") + ": " + discount );
+		        }
+			}
+
+		}
+    }
+    
+    private boolean checkItemEquals(ItemStack target, ItemStack input)
+    {
+      if (((input == null) && (target != null)) || ((input != null) && (target == null))) {
+        return false;
+      }
+      return (target.getItem() == input.getItem()) && ((!target.hasTagCompound()) || (ItemStack.areItemStackTagsEqual(target, input))) && ((target.getItemDamage() == 32767) || (target.getItemDamage() == input.getItemDamage()));
     }
     
 }

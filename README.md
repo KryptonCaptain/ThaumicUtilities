@@ -9,3 +9,4 @@ Notable changes:
 - Numeric runic shielding display
 - Numeric warp display tooltip on Sanity Meter
 - Eldritch Guardian attack/ignore threshold
+- Tooltip to display wand cap and rod discount and capacity

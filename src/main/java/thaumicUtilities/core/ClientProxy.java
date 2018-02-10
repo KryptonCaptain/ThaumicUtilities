@@ -1,7 +1,7 @@
 package thaumicUtilities.core;
 
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import thaumicUtilities.tweaks.VisAmuletTooltipTweaker;
+import thaumicUtilities.tweaks.TooltipTweaker;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -27,7 +27,7 @@ public class ClientProxy extends CommonProxy
     
     @Override
     public void init(final FMLInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new VisAmuletTooltipTweaker());
+        MinecraftForge.EVENT_BUS.register(new TooltipTweaker());
     }
     
     @Override
