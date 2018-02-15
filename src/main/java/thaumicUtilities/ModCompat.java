@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 public class ModCompat {
 	
 	public static Item FMsubCollar;
+	public static Item FMwandRod;
 	public static Boolean ForbiddenMagic;
 	
 	public static Item BMSanguineHelm;
@@ -18,6 +19,7 @@ public class ModCompat {
 	public static void init() {
 		
 		FMsubCollar = GameRegistry.findItem("ForbiddenMagic", "SubCollar");
+		FMwandRod = GameRegistry.findItem("ForbiddenMagic", "WandCores");
 		ForbiddenMagic = Loader.isModLoaded("ForbiddenMagic");
 
 		

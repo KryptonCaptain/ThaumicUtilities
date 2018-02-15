@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
@@ -17,6 +18,8 @@ import thaumcraft.api.wands.StaffRod;
 import thaumcraft.api.wands.WandCap;
 import thaumcraft.api.wands.WandRod;
 import thaumcraft.common.Thaumcraft;
+import thaumcraft.common.config.Config;
+import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.items.relics.ItemSanityChecker;
 import thaumcraft.common.lib.events.EventHandlerRunic;
 import thaumcraft.common.lib.research.ResearchManager;
@@ -170,13 +173,29 @@ public class TooltipTweaker
     @SubscribeEvent
     public void handleWandPartTooltip(final ItemTooltipEvent event) {
     	EntityPlayer player = event.entityPlayer;
-		if (ConfigHandler.wandPartStats && !event.itemStack.isItemEqual(new ItemStack(Items.stick)) ) {
+		if (ConfigHandler.wandPartStats 
+				&& !event.itemStack.isItemEqual(new ItemStack(Items.stick)) 
+				&& !event.itemStack.isItemEqual(new ItemStack(Blocks.bedrock))
+				&& !event.itemStack.isItemEqual(new ItemStack(Blocks.command_block)) 
+				&& !event.itemStack.isItemEqual(new ItemStack(ModCompat.FMwandRod,1,11)) 
+				) {
 			
 			for (WandCap wc : WandCap.caps.values()) {
 				if (checkItemEquals(event.itemStack, wc.getItem())) {
 					int discount = (int)(100-(100*wc.getBaseCostModifier() ));
 					event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + discount + "%");
-		        }
+					
+					if (Config.foundCopperIngot && event.itemStack.isItemEqual(new ItemStack(ConfigItems.itemWandCap,1,3)) ) {
+						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ordo): " + 0 + "%");
+						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Perditio): " + 0 + "%");
+					}
+					if (Config.foundSilverIngot && event.itemStack.isItemEqual(new ItemStack(ConfigItems.itemWandCap,1,4)) ) {
+						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aer): " + 5 + "%");
+						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Terra): " + 5 + "%");
+						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ignis): " + 5 + "%");
+						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aqua): " + 5 + "%");
+					}
+				}
 			}
 			
 			for (WandRod wr : WandRod.rods.values()) {
@@ -187,6 +206,10 @@ public class TooltipTweaker
 			}
 
 		}
+		if (ConfigHandler.wandPartStats && event.itemStack.isItemEqual(new ItemStack(ModCompat.FMwandRod,1,11)) ) {
+			event.toolTip.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("tc.viscapacity") + ": " + 100 );
+		}
+		
     }
     
     private boolean checkItemEquals(ItemStack target, ItemStack input)
