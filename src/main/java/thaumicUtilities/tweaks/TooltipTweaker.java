@@ -183,17 +183,24 @@ public class TooltipTweaker
 			for (WandCap wc : WandCap.caps.values()) {
 				if (checkItemEquals(event.itemStack, wc.getItem())) {
 					int discount = (int)(100-(100*wc.getBaseCostModifier() ));
+					int discountSpec = (int)(100-(100*wc.getSpecialCostModifier() ));
+					
 					event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + discount + "%");
 					
 					if (Config.foundCopperIngot && event.itemStack.isItemEqual(new ItemStack(ConfigItems.itemWandCap,1,3)) ) {
-						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ordo): " + 0 + "%");
-						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Perditio): " + 0 + "%");
+						if (GuiScreen.isShiftKeyDown() ) {
+							event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ordo): " + discountSpec + "%");
+							event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Perditio): " + discountSpec + "%");
+					
+						}
 					}
 					if (Config.foundSilverIngot && event.itemStack.isItemEqual(new ItemStack(ConfigItems.itemWandCap,1,4)) ) {
-						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aer): " + 5 + "%");
-						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Terra): " + 5 + "%");
-						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ignis): " + 5 + "%");
-						event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aqua): " + 5 + "%");
+						if (GuiScreen.isShiftKeyDown() ) {
+							event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aer): " + discountSpec + "%");
+							event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Terra): " + discountSpec + "%");
+							event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Ignis): " + discountSpec + "%");
+							event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + " (Aqua): " + discountSpec + "%");
+						}
 					}
 				}
 			}
