@@ -29,6 +29,7 @@ public class ConfigHandler
     
     public static boolean noStepOnGuardian;
     public static boolean fireproofRunic;
+    public static boolean invisibleAbyssal;
 
     
     public static void init(final File configFile, final File thaumcraftConfig) {
@@ -65,6 +66,9 @@ public class ConfigHandler
         fireproofRunic = config.getBoolean("fireproofRunic", "general.tweaks", true, "Runic Shields will extinguish fire on you, but not prevent you from taking damage");
         
         wandPartStats = config.getBoolean("wandPartTooltipTweak", "general.tweaks", true, "Displays wand cap and rods stats in tooltip");
+        
+        invisibleAbyssal = config.getBoolean("guardianIgnoreAbyssal", "general.tweaks", false, "Eldritch Guardians will ignore you if you are wearing a complete set of Abyssal Runic Armor. (Requires guardianWarpAttackThreshold enabled)");
+        
         
         if (config.hasChanged()) {
             config.save();

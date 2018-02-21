@@ -3,12 +3,14 @@ package thaumicUtilities.tweaks;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.entities.monster.EntityEldritchGuardian;
 import thaumcraft.common.lib.research.ResearchManager;
+import thaumicUtilities.ModCompat;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
@@ -65,6 +67,28 @@ public class DontNoticeMeGuardianSenpai {
             //((EntityEldritchGuardian)e).setTarget((Entity)null);
             //((EntityEldritchGuardian)e).setRevengeTarget((EntityLivingBase)null); //what, you think there's no consequences?
         }
+        
+        //do Dyes abyssal full ignore
+        int set = 0;
+        if ( (ModCompat.AbyssalHelm != null && ModCompat.AbyssalChest != null && ModCompat.AbyssalLegs != null && ModCompat.AbyssalBoots != null ) ) {
+        	if (p.inventory.armorInventory[0] == new ItemStack(ModCompat.AbyssalHelm) ) {
+        		set++;
+        	}
+        	if (p.inventory.armorInventory[1] == new ItemStack(ModCompat.AbyssalChest) ) {
+        		set++;
+        	}
+        	if (p.inventory.armorInventory[2] == new ItemStack(ModCompat.AbyssalLegs) ) {
+        		set++;
+        	}
+        	if (p.inventory.armorInventory[3] == new ItemStack(ModCompat.AbyssalBoots) ) {
+        		set++;
+        	}
+        }
+        if (set == 4) {
+        	((EntityEldritchGuardian)e).setAttackTarget((EntityLivingBase)null);
+            //((EntityEldritchGuardian)e).setTarget((Entity)null);
+            //((EntityEldritchGuardian)e).setRevengeTarget((EntityLivingBase)null); //what, you think there's no consequences?
+    	}
     }
     
     
