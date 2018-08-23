@@ -15,4 +15,11 @@ util.warp.temp=Temporary warp
 util.shift=Press SHIFT for details
 util.noHitGuardian=§oYou cannot yet comprehend how to damage these creatures
 
+stability.0=Negligible
+stability.1=Minor
+stability.2=Moderate
+stability.3=High
+stability.4=Very High
+stability.5=Dangerous
+
 tc.viscapacity=Vis capacity

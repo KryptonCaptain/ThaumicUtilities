@@ -9,6 +9,7 @@ import thaumicUtilities.render.RenderGuiHandler;
 import thaumicUtilities.settings.ConfigHandler;
 import thaumicUtilities.tweaks.DontNoticeMeGuardianSenpai;
 import thaumicUtilities.tweaks.FireproofRunic;
+import thaumicUtilities.tweaks.RenderEventExt;
 import thaumicUtilities.tweaks.TooltipTweaker;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;

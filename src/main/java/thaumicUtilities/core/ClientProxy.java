@@ -1,6 +1,8 @@
 package thaumicUtilities.core;
 
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import thaumicUtilities.render.RenderGuiHandler;
+import thaumicUtilities.tweaks.RenderEventExt;
 import thaumicUtilities.tweaks.TooltipTweaker;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -23,6 +25,7 @@ public class ClientProxy extends CommonProxy
     
     @Override
     public void preInit(final FMLPreInitializationEvent event) {
+    	MinecraftForge.EVENT_BUS.register(new RenderEventExt());
     }
     
     @Override
