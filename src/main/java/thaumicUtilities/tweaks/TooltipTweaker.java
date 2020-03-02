@@ -131,10 +131,10 @@ public class TooltipTweaker
         }
     }
     
-    
+    /*
     @SubscribeEvent
     public void handleSanguineTooltip(final ItemTooltipEvent event) {
-		if (display() /*&& !GuiScreen.isShiftKeyDown()*/ && (
+		if (display() /*&& !GuiScreen.isShiftKeyDown() && (
         		//TODO BM support
         		(ModCompat.BMSanguineHelm!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.BMSanguineHelm))) ||
         		(ModCompat.BMSanguineChest!=null && event.itemStack.isItemEqual(new ItemStack(ModCompat.BMSanguineChest))) ||
@@ -158,7 +158,7 @@ public class TooltipTweaker
             event.toolTip.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + charge + "%");
 
         }
-    }
+    }*/
     
     public static int getFinalVis(ItemStack stack, EntityPlayer player, Aspect aspect)
     {

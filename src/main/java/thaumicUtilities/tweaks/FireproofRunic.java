@@ -40,10 +40,10 @@ public class FireproofRunic {
             }
         }*/
 		if (event.entityLiving != null) {
-			if (event.entity instanceof EntityPlayerMP && (!(event.entity instanceof FakePlayer))) {
+			if (event.entity instanceof EntityPlayer && (!(event.entity instanceof FakePlayer))) {
 	        	EntityPlayer player = (EntityPlayer) event.entity;
 	        	
-	        	int total = ((Integer[])Thaumcraft.instance.runicEventHandler.runicInfo.get(Integer.valueOf(player.getEntityId())))[0].intValue();
+	        	int total = ((Integer[])Thaumcraft.instance.runicEventHandler.runicInfo.get(Integer.valueOf(player.getEntityId())))[0].intValue(); //bad cast here somewhere
 	            int current = ((Integer)Thaumcraft.instance.runicEventHandler.runicCharge.get(Integer.valueOf(player.getEntityId()))).intValue();
 	            
 	            if (total > 0 && current > 0 && /*event.source == DamageSource.onFire &&*/ player.isBurning()) {

@@ -66,8 +66,9 @@ public class ThaumicUtilities
 
     	if (ConfigHandler.noStepOnGuardian)
     		MinecraftForge.EVENT_BUS.register(new DontNoticeMeGuardianSenpai());
-    	if (ConfigHandler.fireproofRunic)
+    	/*if (ConfigHandler.fireproofRunic)
     		MinecraftForge.EVENT_BUS.register(new FireproofRunic());
+    	*/
     	
     	ThaumicUtilities.proxy.postInit(event);
     	

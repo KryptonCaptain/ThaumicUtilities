@@ -28,7 +28,7 @@ public class ConfigHandler
     public static boolean wandPartStats;
     
     public static boolean noStepOnGuardian;
-    public static boolean fireproofRunic;
+    //public static boolean fireproofRunic;
     public static boolean invisibleAbyssal;
 
     
@@ -63,7 +63,7 @@ public class ConfigHandler
         
         noStepOnGuardian = config.getBoolean("guardianWarpAttackThreshold", "general.tweaks", false, "Will prevent Eldritch Guardians from attacking you until a research milestone or warp level is reached.");
         
-        fireproofRunic = config.getBoolean("fireproofRunic", "general.tweaks", true, "Runic Shields will extinguish fire on you, but not prevent you from taking damage");
+        //fireproofRunic = config.getBoolean("fireproofRunic", "general.tweaks", true, "Runic Shields will extinguish fire on you, but not prevent you from taking damage");
         
         wandPartStats = config.getBoolean("wandPartTooltipTweak", "general.tweaks", true, "Displays wand cap and rods stats in tooltip");
         
